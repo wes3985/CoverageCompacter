@@ -3,31 +3,36 @@ CoverageCompacter
 
 Next generation sequencing (NGS) is an expensive process but its cost could be significantly reduced if only good quality libraries
 were sequenced. CoverageCompacter can be used to generate estimates of the coverage of NGS libraries that have been
-sequenced at ultra low depth if those libraries were to undergo further sequencing. This is paticularly useful for analysing DNA which
+sequenced at ultra low depth if those libraries were to undergo further sequencing. This is useful for analysing DNA which
 is likely to have regions of allelic dropout such as samples that have undergone whole genome amplification (WGA) from single celled
 sequencing experiments or other experiments that use low amounts of starting material such as DNA extracted from laser capture 
-microdissection slides. The output from CoverageCompacter can be used to guide which libraries to shortlist for further sequencing.
+microdissection experiments. The output from CoverageCompacter can be used to guide which libraries to shortlist for further sequencing
+or producing useful summaries of sequencing depth in the BED format.
 
 Principles and applications
 ===========================
 This software was inspired by work by Zhang et al 2015 (see link to original article below). NGS libraries produced from DNA that has 
-undergone WGA are likely to contain amplificaton bias, i.e. areas of the genome which are over/under represented. This bias can be approximately 
-guaged from low pass sequencing data based on 2 principles as discussed by Zhang et al. (1) Essentially sequencing a library at ultra low sequencing 
+undergone WGA are likely to contain amplificaton bias, i.e. areas of the genome which are over/under represented. This bias can be 
+estimated from low pass sequencing data based on 2 principles as discussed by Zhang et al. (1) Essentially sequencing a library at ultra low sequencing 
 can be thought of as 'sampling' a library, we are sequencing regions which are well represented in the overall fragment pool. (2) WGA tends to produce 
 amplicons rangeing between 10-50Kb in size. Infering from these 2 concepts; if a library is sequenced at low depth and 1 or more
 reads map to a given loci, then it can be asumed that if more sequencing is done then its likely to cover the 10-50kb region surrounding the loci. 
 
-CoverageCompacter uses the BED format output of Samtools depth (see Samtools docs for detals) and compacts this output into smaller loci. CoverageCompacter takes the binsize as 
-an argument and will compact areas of coverage into a single loci surounded by areas of no coverage up to half the size of the binSize arguement. The reasoning behind 
-this is that up to half an amplicon telomeric and centromeric of a given read are likely be contained within the library but not yet sequenced. Where 2 amplicons are 
-separated by less than half a bin, CoverageCompacter will merge the loci into a single loci. See 'Inputs and outputs of the software' examples 1-4 for more detail 
-about how this is implemented.
-
-CoverageCompacter can also be used to compress loci with a minimum depth chosen by the user. This can be suplied as an arguement. The 'minCov' arguement is set to 0 by 
-default but if set to 10 (for example) then loci 
-
 - Original aritcle: https://www.nature.com/articles/ncomms7822
 - Pubmed link: https://www.ncbi.nlm.nih.gov/pubmed/25879913
+
+CoverageCompacter uses the BED format output of Samtools depth (see Samtools docs for detals) and compacts this output into smaller loci. CoverageCompacter 
+takes the binsize as an argument and will compact areas of coverage into a single loci surounded by areas of no coverage up to half the size of the binSize 
+arguement. The reasoning behind this is that up to half an amplicon telomeric and centromeric of a given read are likely be contained within the library 
+but not yet sequenced. Where 2 amplicons are separated by less than half a bin, CoverageCompacter will merge the loci into a single loci. See 'Inputs 
+and outputs of the software' examples 1-4 for more detail about how this is implemented.
+
+CoverageCompacter can also be used to compress loci with a minimum depth chosen by the user. This can be suplied as an arguement. The 'NoCov' arguement is set to 0 by 
+default but if set to 10 (for example) then loci will be identified as having sufficient coverage if they have greater than 10 reads covering a single base. 
+The loci will be compressed into regions with above or below the minimum coverage and separated by the binsize. This is useful for identifying regions that may
+require more sequencing, or comparing multiple libraries to identify areas of poor coverage across a range of samples. It can also be used to identify regions 
+that have excessive coverage or verifying that targetted sequencing experiments have performed appropriately. It can also be used to identify transcript boundaries 
+in RNASeq datasets.
 
 
 Dependencies
@@ -40,13 +45,13 @@ Python 3
 Installation
 ============
 
-git clone ...........
+git clone https://github.com/wes3985/CoverageCompacter.git
 
 
 Instructions for usage
 ================
 (1) Run samtools depth over your BAM file(s) to generate a depth file. You can use the following command and launch 
-each chromosome to a separate core on our cluster.
+each chromosome to a separate core on a cluster.
 
 bam_file_list 				= a text file containing a list with the full paths to your bam files.
 path_to_ref   				= the full path to the reference genome.
@@ -57,18 +62,22 @@ samtools depth -a -q 10 -Q 20 --reference $path_to_ref -r $chr -f $bam_file_list
 
 (2) Call CoverageCompacter, this can take some time for large genomes and/or many samples, we recommend launching each chromosome to a different core.
 
-depth_file_full_outpath	= the full file path to write the depth data to.
+in_depthfile			= the input depth file produced by samtools depth
+outfile					= the full file path to write the depth data to.
 samples					= a string containing the samples separated by commas, if calling from a python shell: "sample1,sample2,sample3"
-binSize					= the presumed size of the amplicons, we recommend 10000 based on Zhang et al (see link above). Setting the binSize to
+CHROM					= The chromosome covered by the infile e.g "chr1", "1". The infile must span only a single chromosome or loci from sequential chromosomes
+						  will be merged. This functionality may be improved in future versions depending on demand.
+binSize					= the presumed size of the amplicons, recommend size is 10000 based on Zhang et al (see link above). Setting the binSize to
 						  zero also makes this a useful tool to check for transcript boundaries in RNASeq data.
-outfile					= the full path to the outfile. 
+NoCov					= the minimum depth at which will be regions will be separated into coverage / no coverage
 
 # from a UNIX command line or launch script
-python CoverageCompacter $depth_file_full_outpath $samples $binSize $outfile
+python CoverageCompacter $in_depthfile $outfile $samples $CHROM $binSize
+CoverageCompacter(in_depthfile, outfile, samples, CHROM, binSize=10000, 0
 
 # from a python interface
 from CoverageCompacter import CoverageCompacter
-CoverageCompacter(depth_file_full_outpath, samples, binSize, outfile)
+CoverageCompacter(depth_file, outfile, samples, CHROM, 10000, 0)
 
 Inputs and outputs of the software
 ==================================
