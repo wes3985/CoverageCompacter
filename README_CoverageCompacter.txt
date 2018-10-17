@@ -55,14 +55,14 @@ each chromosome to a separate core on a cluster.
 
 bam_file_list 				= a text file containing a list with the full paths to your bam files.
 path_to_ref   				= the full path to the reference genome.
-chr		   					= the chromosome in the same format as your reference.
-depth_file_full_outpath		= the full file path to write the depth data to.
+chr		   			= the chromosome in the same format as your reference.
+depth_file_full_outpath			= the full file path to write the depth data to.
 
 samtools depth -a -q 10 -Q 20 --reference $path_to_ref -r $chr -f $bam_file_list > $depth_file_full_outpath
 
 (2) Call CoverageCompacter, this can take some time for large genomes and/or many samples, we recommend launching each chromosome to a different core.
 
-in_depthfile			= the input depth file produced by samtools depth
+in_depthfile				= the input depth file produced by samtools depth
 outfile					= the full file path to write the depth data to.
 samples					= a string containing the samples separated by commas, if calling from a python shell: "sample1,sample2,sample3"
 CHROM					= The chromosome covered by the infile e.g "chr1", "1". The infile must span only a single chromosome or loci from sequential chromosomes
@@ -108,15 +108,15 @@ chr1	19	0
 # The output file is a headered file in the bed format. Below is a description of each header:
 
 chr					= chromosome
-start				= start position of the loci
+start					= start position of the loci
 end					= end postion of the loci
-size				= total size of the loci
-firstCoveredBase	= the first base in the loci with coverage >0
-lastCoveredBase		= the last base in the loci with coverage >0
-meanCoverage		= mean coverage accross the loci
-NBasesCovered	    = toal number of bases covered in the loci
-DepthSum			= the total sum of depth in the loci, this is useful for identifying regions of high relative coverage
-coverageFraction	= fraction of the loci that has coverage >0
+size					= total size of the loci
+firstCoveredBase			= the first base in the loci with coverage >0
+lastCoveredBase				= the last base in the loci with coverage >0
+meanCoverage				= mean coverage accross the loci
+NBasesCovered	    			= toal number of bases covered in the loci
+DepthSum				= the total sum of depth in the loci, this is useful for identifying regions of high relative coverage
+coverageFraction			= fraction of the loci that has coverage >0
 
 
 (1) OUTPUT of CoverageCompacter with binSize set to '0' 
