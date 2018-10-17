@@ -7,7 +7,7 @@
 import sys
 from collections import OrderedDict
 import math
-
+import datetime
 
 class Loci(object):
 
@@ -192,4 +192,6 @@ def get_data(file_handle):
 
 
 if __name__ == '__main__':
+    print("start: ",datetime.datetime.now())
     CoverageCompacter(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6])
+    print("finished: ",datetime.datetime.now())    
