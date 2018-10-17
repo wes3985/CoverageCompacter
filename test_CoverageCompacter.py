@@ -2,7 +2,7 @@
 """
 Created on Fri Oct  5 11:15:36 2018
 
-@author: rmhawwo
+@author: w.woollard
 """
 
 import unittest
