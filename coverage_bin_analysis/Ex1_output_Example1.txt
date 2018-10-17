@@ -1,5 +1,0 @@
-chr	start	end	size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
-chr1	1	1	1	None	None	0.0	0	0	0.0
-chr1	2	10	9	3	9	0.6666666666666666	6	6	0.6666666666666666
-chr1	11	11	1	None	None	0.0	0	0	0.0
-chr1	12	19	8	13	18	0.625	5	5	0.625
