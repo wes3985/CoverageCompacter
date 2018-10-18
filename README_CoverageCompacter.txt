@@ -200,7 +200,9 @@ chr1	5		10		6		None				None			0.0				0				0			0.0
 chr1	11		12		2		11					12				2.0				2				4			1.0
 chr1	13		19		7		None				None			0.0				0				0			0.0
 
-
+Future Updates
+==============
+(1) Add an argument which can be specified by the user to exclude regions of no coverage from the output file.
 
 
 
