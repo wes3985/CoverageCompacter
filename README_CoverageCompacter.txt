@@ -25,7 +25,8 @@ CoverageCompacter uses the BED format output of Samtools depth (see Samtools doc
 takes the binsize as an argument and will compact areas of coverage into a single loci surounded by areas of no coverage up to half the size of the binSize 
 arguement. The reasoning behind this is that up to half an amplicon telomeric and centromeric of a given read are likely be contained within the library 
 but not yet sequenced. Where 2 amplicons are separated by less than half a bin, CoverageCompacter will merge the loci into a single loci. See 'Inputs 
-and outputs of the software' examples 1-4 for more detail about how this is implemented.
+and outputs of the software' examples 1-4 for more detail about how this is implemented. The output files can then be more easily compared with established tools 
+such as 'bedtools intersect'.
 
 CoverageCompacter can also be used to compress loci with a minimum depth chosen by the user. This can be suplied as an arguement. The 'NoCov' arguement is set to 0 by 
 default but if set to 10 (for example) then loci will be identified as having sufficient coverage if they have greater than 10 reads covering a single base. 
@@ -73,7 +74,6 @@ NoCov					= the minimum depth at which will be regions will be separated into co
 
 # from a UNIX command line or launch script
 python CoverageCompacter $in_depthfile $outfile $samples $CHROM $binSize
-CoverageCompacter(in_depthfile, outfile, samples, CHROM, binSize=10000, 0
 
 # from a python interface
 from CoverageCompacter import CoverageCompacter
@@ -82,8 +82,45 @@ CoverageCompacter(depth_file, outfile, samples, CHROM, 10000, 0)
 Inputs and outputs of the software
 ==================================
 
-# INPUT EXAMPLE 1: This is the output format of samtools depth, col1 = chromosome, col2 = position in chromosome, col3 = depth at position
+# INPUT EXAMPLE: This is the output format of samtools depth, col1 = chromosome, col2 = position in chromosome, col3 = depth at position
 # See samtools depth docs for more information
+
+chr1	1	0
+chr1	2	0
+chr1	3	0
+chr1	4	0
+chr1	5	0
+chr1	6	0
+chr1	7	0
+chr1	8	0
+chr1	9	1
+chr1	10	1
+chr1	11	1
+chr1	12	1
+chr1	13	1
+chr1	14	1
+chr1	15	1
+
+# OUTPUT EXAMPLE
+
+chr	start	end	size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
+chr1	1	8	8	None	None	0	0	0	0
+chr1	9	15	7	9	15	1	7	7	1
+
+# The output file is a headered file in the bed format. Below is a description of each header:
+
+chr					= chromosome
+start				= start position of the loci
+end					= end postion of the loci
+size				= total size of the loci
+firstCoveredBase	= the first base in the loci with coverage >0
+lastCoveredBase		= the last base in the loci with coverage >0
+meanCoverage		= mean coverage accross the loci
+NBasesCovered	    = toal number of bases covered in the loci
+DepthSum			= the total sum of depth in the loci, this is useful for identifying regions of high relative coverage
+coverageFraction	= fraction of the loci that has coverage >0
+
+# INPUT EXAMPLE 1
 
 chr1	1	0
 chr1	2	0
@@ -104,20 +141,6 @@ chr1	16	1
 chr1	17	1
 chr1	18	1
 chr1	19	0
-
-# The output file is a headered file in the bed format. Below is a description of each header:
-
-chr					= chromosome
-start					= start position of the loci
-end					= end postion of the loci
-size					= total size of the loci
-firstCoveredBase			= the first base in the loci with coverage >0
-lastCoveredBase				= the last base in the loci with coverage >0
-meanCoverage				= mean coverage accross the loci
-NBasesCovered	    			= toal number of bases covered in the loci
-DepthSum				= the total sum of depth in the loci, this is useful for identifying regions of high relative coverage
-coverageFraction			= fraction of the loci that has coverage >0
-
 
 (1) OUTPUT of CoverageCompacter with binSize set to '0' 
 # Notes: 
@@ -150,7 +173,8 @@ chr1	12		19		8		13					18				0.625			5				5			0.625
 
 (3) OUTPUT of CoverageCompacter with binSize set to '2'
 # Notes:
-	- The output is the same as supplying binsize of 1 (2/2=1), this is example data
+	- The output is the same as supplying binsize of 1 (2/2=1) because a boundary is formed at half the bin size and a single base cannot
+	be cut in half. 
 
 chr		start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
 chr1	1		1		1		None				None			0.0				0				0			0.0
@@ -208,4 +232,4 @@ Future Updates
 
 Support
 =======
-Please inform us of any issues at 'Project@google-groups.com'
+Please inform us of any issues at 'w.woollard@ucl.ac.uk'
