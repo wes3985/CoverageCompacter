@@ -1,0 +1,10 @@
+README.md
+setup.py
+CoverageCompacter/CoverageCompacter.py
+CoverageCompacter/__init__.py
+CoverageCompacter/test_CoverageCompacter.py
+CoverageCompacter.egg-info/PKG-INFO
+CoverageCompacter.egg-info/SOURCES.txt
+CoverageCompacter.egg-info/dependency_links.txt
+CoverageCompacter.egg-info/not-zip-safe
+CoverageCompacter.egg-info/top_level.txt
