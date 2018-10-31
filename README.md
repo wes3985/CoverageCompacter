@@ -118,9 +118,11 @@ chr1	15	1
 
 OUTPUT EXAMPLE
 
->chr	start	end	size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
->chr1	1	8	8	None	None	0	0	0	0
->chr1	9	15	7	9	15	1	7	7	1
+```
+chr	start	end	size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
+chr1	1	8	8	None	None	0	0	0	0
+chr1	9	15	7	9	15	1	7	7	1
+```
 
 The output file is a headered file in the bed format. Below is a description of each header:
 
@@ -139,41 +141,45 @@ Below is an example input with a description of what happens when different numb
 
 INPUT EXAMPLE 1
 
->chr1	1	0
->chr1	2	0
->chr1	3	1
->chr1	4	1
->chr1	5	1
->chr1	6	0
->chr1	7	0
->chr1	8	0
->chr1	9	1
->chr1	10	1
->chr1	11	0
->chr1	12	0
->chr1	13	1
->chr1	14	1
->chr1	15	0
->chr1	16	1
->chr1	17	1
->chr1	18	1
->chr1	19	0
+```
+chr1	1	0
+chr1	2	0
+chr1	3	1
+chr1	4	1
+chr1	5	1
+chr1	6	0
+chr1	7	0
+chr1	8	0
+chr1	9	1
+chr1	10	1
+chr1	11	0
+chr1	12	0
+chr1	13	1
+chr1	14	1
+chr1	15	0
+chr1	16	1
+chr1	17	1
+chr1	18	1
+chr1	19	0
+```
 
 OUTPUT of CoverageCompacter with binSize set to '0' 
 Notes: 
 - areas of no coverage are joined into a single loci in the bed format
 - areas of continuous coverage are also joined into single loci
 
->chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
->chr1	1		2		2		None				None			0.0				0				0			0.0
->chr1	3		5		3		3					5				1.0				3				3			1.0
->chr1	6		8		3		None				None			0.0				0				0			0.0
->chr1	9		10		2		9					10				1.0				2				2			1.0
->chr1	11		12		2		None				None			0.0				0				0			0.0
->chr1	13		14		2		13					14				1.0				2				2			1.0
->chr1	15		15		1		None				None			0.0				0				0			0.0
->chr1	16		18		3		16					18				1.0				3				3			1.0
->chr1	19		19		1		None				None			0.0				0				0			0.0
+```
+chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
+chr1	1		2		2		None				None			0.0				0				0			0.0
+chr1	3		5		3		3					5				1.0				3				3			1.0
+chr1	6		8		3		None				None			0.0				0				0			0.0
+chr1	9		10		2		9					10				1.0				2				2			1.0
+chr1	11		12		2		None				None			0.0				0				0			0.0
+chr1	13		14		2		13					14				1.0				2				2			1.0
+chr1	15		15		1		None				None			0.0				0				0			0.0
+chr1	16		18		3		16					18				1.0				3				3			1.0
+chr1	19		19		1		None				None			0.0				0				0			0.0
+```
 
 OUTPUT of CoverageCompacter with binSize set to '1'
 Notes:
@@ -181,12 +187,14 @@ Notes:
 - Loci with coverage will include 1 bp with zero coverage on either side. 
 - Where a single base has no coverage between 2 loci these adjacent loci will be merged.
 
->chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
->chr1	1		1		1		None				None			0.0				0				0			0.0
->chr1	2		6		5		3					5				0.6				3				3			0.6
->chr1	7		7		1		None				None			0.0				0				0			0.0
->chr1	8		11		4		9					10				0.5				2				2			0.5
->chr1	12		19		8		13					18				0.625			5				5			0.625
+```
+chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
+chr1	1		1		1		None				None			0.0				0				0			0.0
+chr1	2		6		5		3					5				0.6				3				3			0.6
+chr1	7		7		1		None				None			0.0				0				0			0.0
+chr1	8		11		4		9					10				0.5				2				2			0.5
+chr1	12		19		8		13					18				0.625			5				5			0.625
+```
 
 OUTPUT of CoverageCompacter with binSize set to '2'
 Notes:
@@ -194,53 +202,60 @@ Notes:
 - This example is to illustrate the behavior, in reality we would expect CoverageCompacter to be used either with binSize = 0 or binSize set to much 
 larger values such as 10,000
 
->chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
->chr1	1		1		1		None				None			0.0				0				0			0.0
->chr1	2		6		5		3					5				0.6				3				3			0.6
->chr1	7		7		1		None				None			0.0				0				0			0.0
->chr1	8		11		4		9					10				0.5				2				2			0.5
->chr1	12		19		8		13					18				0.625			5				5			0.625
+```
+chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
+chr1	1		1		1		None				None			0.0				0				0			0.0
+chr1	2		6		5		3					5				0.6				3				3			0.6
+chr1	7		7		1		None				None			0.0				0				0			0.0
+chr1	8		11		4		9					10				0.5				2				2			0.5
+chr1	12		19		8		13					18				0.625			5				5			0.625
+```
 
 OUTPUT of CoverageCompacter with binSize set to '3'
 Notes:
 - The area between postion 6 and postion 8 has 3 bp with zero coverage, in cases where splits occur that could reasonably fit into 
  both adjacent loci, the loci is split and the extra non-covered base is allocated to the previous loci
 
->chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage		NBasesCovered	DepthSum	coverageFraction
->chr1	1		7		7		3					5				0.42857142857142855	3				3			0.42857142857142855
->chr1	8		19		12		9					18				0.5833333333333334	7				7			0.5833333333333334
-
+``` 
+chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage		NBasesCovered	DepthSum	coverageFraction
+chr1	1		7		7		3					5				0.42857142857142855	3				3			0.42857142857142855
+chr1	8		19		12		9					18				0.5833333333333334	7				7			0.5833333333333334
+```
 
 INPUT EXAMPLE 2:
 
->chr1	1	0
->chr1	2	0
->chr1	3	1
->chr1	4	2
->chr1	5	1
->chr1	6	0
->chr1	7	0
->chr1	8	0
->chr1	9	1
->chr1	10	1
->chr1	11	2
->chr1	12	2
->chr1	13	1
->chr1	14	1
->chr1	15	0
->chr1	16	1
->chr1	17	1
->chr1	18	1
->chr1	19	0
+```
+chr1	1	0
+chr1	2	0
+chr1	3	1
+chr1	4	2
+chr1	5	1
+chr1	6	0
+chr1	7	0
+chr1	8	0
+chr1	9	1
+chr1	10	1
+chr1	11	2
+chr1	12	2
+chr1	13	1
+chr1	14	1
+chr1	15	0
+chr1	16	1
+chr1	17	1
+chr1	18	1
+chr1	19	0
+```
 
 OUTPUT of CoverageCompacter with binSize set to '0' and noCov set to '1'
 
->chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
->chr1	1		3		3		None				None			0.0				0				0			0.0
->chr1	4		4		1		4					4				2.0				1				2			1.0
->chr1	5		10		6		None				None			0.0				0				0			0.0
->chr1	11		12		2		11					12				2.0				2				4			1.0
->chr1	13		19		7		None				None			0.0				0				0			0.0
+```
+chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
+chr1	1		3		3		None				None			0.0				0				0			0.0
+chr1	4		4		1		4					4				2.0				1				2			1.0
+chr1	5		10		6		None				None			0.0				0				0			0.0
+chr1	11		12		2		11					12				2.0				2				4			1.0
+chr1	13		19		7		None				None			0.0				0				0			0.0
+```
 
 Future Updates
 ==============
