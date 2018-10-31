@@ -47,13 +47,13 @@ Dependencies
 Installation
 ============
 Directly from git repo:
-'''
+```
 git clone https://github.com/wes3985/CoverageCompacter.git
-'''
+```
 Or using pip:
-'''
+```
 pip install CoverageCompacter
-'''
+```
 
 Instructions for usage
 ================
