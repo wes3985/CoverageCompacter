@@ -249,12 +249,12 @@ chr1	19	0
 OUTPUT of CoverageCompacter with binSize set to '0' and noCov set to '1'
 
 ```
-chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
-chr1	1		3		3		None				None			0.0				0				0			0.0
-chr1	4		4		1		4					4				2.0				1				2			1.0
-chr1	5		10		6		None				None			0.0				0				0			0.0
-chr1	11		12		2		11					12				2.0				2				4			1.0
-chr1	13		19		7		None				None			0.0				0				0			0.0
+chr	start	end	size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
+chr1	1	3	3	None	None	0.0	0	0	0.0
+chr1	4	4	1	4	4	2.0	1	2	1.0
+chr1	5	10	6	None	None	0.0	0	0	0.0
+chr1	11	12	2	11	12	2.0	2	4	1.0
+chr1	13	19	7	None	None	0.0	0	0	0.0
 ```
 
 Future Updates
