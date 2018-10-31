@@ -65,9 +65,9 @@ each chromosome to a separate core if you are using a cluster.
 - chr		   					= the chromosome in the same format as your reference.
 - depth_file_full_outpath		= the full file path to write the depth data to.
 
-'''
+```
 samtools depth -a -q 10 -Q 20 --reference $path_to_ref -r $chr -f $bam_file_list > $depth_file_full_outpath
-'''
+```
 
 (2) Call CoverageCompacter, this can take some time for large genomes and/or many samples, we recommend launching each chromosome to a different core.
 
@@ -81,15 +81,15 @@ samtools depth -a -q 10 -Q 20 --reference $path_to_ref -r $chr -f $bam_file_list
 - NoCov					= the minimum depth at which will be regions will be separated into coverage / no coverage
 
 From a UNIX command line or launch script:
-'''
+```
 python CoverageCompacter $in_depthfile $outfile $samples $CHROM $binSize
-'''
+```
 
 From a python interface:
-'''
+```
 from CoverageCompacter import CoverageCompacter
 CoverageCompacter(depth_file, outfile, samples, CHROM, 10000, 0)
-'''
+```
 
 Inputs and outputs of the software
 ==================================
@@ -98,21 +98,23 @@ INPUT EXAMPLE: This is the output format of samtools depth which is supplied to 
 col1 = chromosome, col2 = position in chromosome, col3 = depth at position.
 See samtools depth docs for more information.
 
->chr1	1	0
->chr1	2	0
->chr1	3	0
->chr1	4	0
->chr1	5	0
->chr1	6	0
->chr1	7	0
->chr1	8	0
->chr1	9	1
->chr1	10	1
->chr1	11	1
->chr1	12	1
->chr1	13	1
->chr1	14	1
->chr1	15	1
+```
+chr1	1	0
+chr1	2	0
+chr1	3	0
+chr1	4	0
+chr1	5	0
+chr1	6	0
+chr1	7	0
+chr1	8	0
+chr1	9	1
+chr1	10	1
+chr1	11	1
+chr1	12	1
+chr1	13	1
+chr1	14	1
+chr1	15	1
+```
 
 OUTPUT EXAMPLE
 
