@@ -152,7 +152,7 @@ class Chromosome(object):
         self.current_loci.end = self.currentPosition 
 
 # MAIN FUNCTION
-def CoverageCompacter(depth_file, outfile, samples, CHROM, binSize=10000, NoCov=0):
+def CoverageCompacter(depth_file, outfilePrefix, samples, CHROM, binSize=10000, NoCov=0):
     binSize=int(binSize)
     NoCov=int(NoCov)
     SAMPLES=samples.split(',')
@@ -178,7 +178,7 @@ def CoverageCompacter(depth_file, outfile, samples, CHROM, binSize=10000, NoCov=
                 break 
     
     for i,s in zip(c_dict,s_dict):
-        with open(outfile+'_'+s+'.txt','w') as w:
+        with open(outfilePrefix+'_'+s+'.txt','w') as w:
             w.write('chr\tstart\tend\tsize\tfirstCoveredBase\tlastCoveredBase\tmeanCoverage\tNBasesCovered\tDepthSum\tcoverageFraction\n')
             for bed in c_dict[i].LociList:
                 w.write('\t'.join([str(x) for x in [c_dict[i].CHR, bed.start, bed.end, bed.size, bed.FirstCoveredBase, bed.LastCoveredBase, bed.meanCoverage, bed.N_basesCovered, bed.depthSum, bed.coverageFraction]])+'\n')        

@@ -72,7 +72,7 @@ samtools depth -a -q 10 -Q 20 --reference $path_to_ref -r $chr -f $bam_file_list
 (2) Call CoverageCompacter, this can take some time for large genomes and/or many samples, we recommend launching each chromosome to a different core.
 
 - in_depthfile			= the input depth file produced by samtools depth
-- outfile				= the full file path to write the depth data to.
+- outfile				= the full file prefix to write the depth data to (excluding file extension and sample information).
 - samples				= a string containing the samples separated by commas, if calling from a python shell: "sample1,sample2,sample3"
 - CHROM					= The chromosome covered by the infile e.g "chr1", "1". The infile must span only a single chromosome or loci from sequential chromosomes
 						  will be merged. This functionality may be improved in future versions depending on demand.
@@ -213,13 +213,11 @@ chr1	12	19	8	13	18	0.625	5	5	0.625
 
 OUTPUT of CoverageCompacter with binSize set to '3'
 Notes:
-- The area between postion 6 and postion 8 has 3 bp with zero coverage, in cases where splits occur that could reasonably fit into 
- both adjacent loci, the loci is split and the extra non-covered base is allocated to the previous loci
-
+- The area between postion 6 and postion 8 has 3 bp with zero coverage, this is the length of a whole bin so in this case merges
+the entire region into a single loci.
 ``` 
-chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage		NBasesCovered	DepthSum	coverageFraction
-chr1	1	7	7	3	5	0.42857142857142855	3	3	0.42857142857142855
-chr1	8	19	12	9	18	0.5833333333333334	7	7	0.5833333333333334
+chr	start	end	size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
+chr1	1	19	19	3	18	0.5263157894736842	10	10	0.5263157894736842
 ```
 
 INPUT EXAMPLE 2:
@@ -260,6 +258,7 @@ chr1	13	19	7	None	None	0.0	0	0	0.0
 Future Updates
 ==============
 - Add an argument which can be specified by the user to exclude regions of no coverage from the output file.
+- Add functionality so that files can be split by chromosome is multichromosome file is supplied, potentially use reference index.
 
 
 Support
