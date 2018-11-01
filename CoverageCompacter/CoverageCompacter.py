@@ -37,7 +37,7 @@ class Loci(object):
             self.coverageFraction = 0.0
 
     def increment_depth(self, depth, currentPosition):
-        # these events occur whenever a covered base is read
+        # this method is invoked whenever a covered base is read
         self.LastCoveredBase = currentPosition
         self.N_basesCovered += 1
         self.depthSum += depth  
@@ -80,7 +80,7 @@ class Chromosome(object):
                     # This nested merge is a failsafe incase merging has failed to comlete properly, 
                     # it doesn't appear to be called in any simulations
                     self.current_loci = self.merge_loci
-                    print('WARNING: nested merge')
+                    print('WARNING: nested merge occured at:',self.CHR,self.currentPosition)
         return self.current_loci
     
 
@@ -152,7 +152,7 @@ class Chromosome(object):
         self.current_loci.end = self.currentPosition 
 
 # MAIN FUNCTION
-def CoverageCompacter(depth_file, outfilePrefix, samples, CHROM, binSize=10000, NoCov=0):
+def CoverageCompacter(depth_file='', outfilePrefix='', samples='', CHROM='', binSize=10000, NoCov=0):
     binSize=int(binSize)
     NoCov=int(NoCov)
     SAMPLES=samples.split(',')
