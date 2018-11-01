@@ -133,8 +133,8 @@ The output file is a headered file in the bed format. Below is a description of 
 - firstCoveredBase		= the first base in the loci with coverage >0
 - lastCoveredBase		= the last base in the loci with coverage >0
 - meanCoverage			= mean coverage accross the loci
-- NBasesCovered	    	= toal number of bases covered in the loci
-- DepthSum				= the total sum of depth in the loci, this is useful for identifying regions of high relative coverage
+- NBasesCovered	    	= total number of bases covered in the loci
+- DepthSum				= total sum of depth in the loci, this is useful for identifying regions of high relative coverage
 - coverageFraction		= fraction of the loci that has coverage >0
 
 Below is an example input with a description of what happens when different numbers are supplied to the binsize arguement.
