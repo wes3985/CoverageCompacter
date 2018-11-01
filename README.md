@@ -170,15 +170,15 @@ Notes:
 
 ```
 chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
-chr1	1		2		2		None				None			0.0				0				0			0.0
-chr1	3		5		3		3					5				1.0				3				3			1.0
-chr1	6		8		3		None				None			0.0				0				0			0.0
-chr1	9		10		2		9					10				1.0				2				2			1.0
-chr1	11		12		2		None				None			0.0				0				0			0.0
-chr1	13		14		2		13					14				1.0				2				2			1.0
-chr1	15		15		1		None				None			0.0				0				0			0.0
-chr1	16		18		3		16					18				1.0				3				3			1.0
-chr1	19		19		1		None				None			0.0				0				0			0.0
+chr1	1	2	2	None	None	0.0	0	0	0.0
+chr1	3	5	3	3	5	1.0	3	3	1.0
+chr1	6	8	3	None	None	0.0	0	0	0.0
+chr1	9	10	2	9	10	1.0	2	2	1.0
+chr1	11	12	2	None	None	0.0	0	0	0.0
+chr1	13	14	2	13	14	1.0	2	2	1.0
+chr1	15	15	1	None	None	0.0	0	0	0.0
+chr1	16	18	3	16	18	1.0	3	3	1.0
+chr1	19	19	1	None	None	0.0	0	0	0.0
 ```
 
 OUTPUT of CoverageCompacter with binSize set to '1'
@@ -189,11 +189,11 @@ Notes:
 
 ```
 chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
-chr1	1		1		1		None				None			0.0				0				0			0.0
-chr1	2		6		5		3					5				0.6				3				3			0.6
-chr1	7		7		1		None				None			0.0				0				0			0.0
-chr1	8		11		4		9					10				0.5				2				2			0.5
-chr1	12		19		8		13					18				0.625			5				5			0.625
+chr1	1	1	1	None	None	0.0	0	0	0.0
+chr1	2	6	5	3	5	0.6	3	3	0.6
+chr1	7	7	1	None	None	0.0	0	0	0.0
+chr1	8	11	4	9	10	0.5	2	2	0.5
+chr1	12	19	8	13	18	0.625	5	5	0.625
 ```
 
 OUTPUT of CoverageCompacter with binSize set to '2'
@@ -204,11 +204,11 @@ larger values such as 10,000
 
 ```
 chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage	NBasesCovered	DepthSum	coverageFraction
-chr1	1		1		1		None				None			0.0				0				0			0.0
-chr1	2		6		5		3					5				0.6				3				3			0.6
-chr1	7		7		1		None				None			0.0				0				0			0.0
-chr1	8		11		4		9					10				0.5				2				2			0.5
-chr1	12		19		8		13					18				0.625			5				5			0.625
+chr1	1	1	1	None	None	0.0	0	0	0.0
+chr1	2	6	5	3	5	0.6	3	3	0.6
+chr1	7	7	1	None	None	0.0	0	0	0.0
+chr1	8	11	4	9	10	0.5	2	2	0.5
+chr1	12	19	8	13	18	0.625	5	5	0.625
 ```
 
 OUTPUT of CoverageCompacter with binSize set to '3'
@@ -218,8 +218,8 @@ Notes:
 
 ``` 
 chr	start	end		size	firstCoveredBase	lastCoveredBase	meanCoverage		NBasesCovered	DepthSum	coverageFraction
-chr1	1		7		7		3					5				0.42857142857142855	3				3			0.42857142857142855
-chr1	8		19		12		9					18				0.5833333333333334	7				7			0.5833333333333334
+chr1	1	7	7	3	5	0.42857142857142855	3	3	0.42857142857142855
+chr1	8	19	12	9	18	0.5833333333333334	7	7	0.5833333333333334
 ```
 
 INPUT EXAMPLE 2:
