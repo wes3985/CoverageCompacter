@@ -1,5 +1,5 @@
 CoverageCompacter
-==============
+=================
 
 Next generation sequencing (NGS) is an expensive process but its cost could be significantly reduced if only good quality libraries
 were sequenced. CoverageCompacter can be used to generate estimates of the coverage of NGS libraries that have been
